@@ -9,18 +9,29 @@ place: TOTh 2016 Conference, Chambéry
 
 # JSKOS Knowledge Organization Systems format
 
-## JSKOS format
+## Project coli-conc
 
-* created as part of [project coli-conc](https://coli-conc.gbv.de/)\
-  \ldots to provide uniform access to KOS
-* based on RDF (SKOS and other ontologies)\
+![](overview-coli-conc.png)
+
+## JSKOS data format
+
+Requirement: uniform access to KOS data
+
+* based on RDF (SKOS & Dublin Core)\
   \ldots but more restrictive (unification)
 * based on JSON-LD\
   \ldots extended by language ranges and closed world statements
-* main goal:\
-  \ldots _easy use of any KOS in web applications_
 
-## JSKOS example: GeoNames record
+main goal: **easy use of KOS data in web applications**
+
+<https://gbv.github.io/jskos/>
+
+## Concept example: GeoNames
+
+![<http://sws.geonames.org/614540/>](screenshot-geonames.png)
+
+
+## JSKOS concept example from GeoNames (abbreviated)
 
 ~~~json
 {
@@ -28,24 +39,30 @@ place: TOTh 2016 Conference, Chambéry
   "prefLabel": {
     "en": "Georgia", 
     "fr": "Géorgie", 
-    "de": "Georien", ...
+    "de": "Georgien", 
+    "-": "..."
   },
   "broader": [ 
     { "uri": "http://sws.geonames.org/6255147/" } 
   ],
   "inScheme": [ 
     { "uri": "http://bartoc.org/en/node/15" }
-  ], ...
-}
+  ],
+  ...
 ~~~
 
 ## BARTOC in JSKOS
 
-...*fehlt noch*...
+* KOS can also be expressed in JSKOS
+* Mapping of BARTOC fields to JSKOS
+* BARTOC JSKOS export available:\
+  <https://github.com/gbv/bartoc-dumps/>
 
-BARTOC JSKOS export: <https://github.com/gbv/bartoc-dumps/>
+## BARTOC example: Eurovoc
 
-## JSKOS example: Eurovoc record
+![](screenshot-bartoc-eurovoc.png)
+
+## JSKOS BARTOC example: Eurovoc record (abbreviated)
 
 ~~~json
 {
@@ -57,46 +74,39 @@ BARTOC JSKOS export: <https://github.com/gbv/bartoc-dumps/>
   "prefLabel": {
     "en": "Multilingual Thesaurus of the European Union"
   },
-  "altLabel": { "en": "EuroVoc" },
+  "altLabel": { "en": [ "EuroVoc" ] },
   "languages": [ "bg", "ca", "cs", "da", "de", "el",
-                 "en", "es", "et", "fi", "fr", ... ],
-  ...
-}
+                 "en", "es", "et", "fi", "fr", 
+  ... 
 ~~~
 
 ## JSKOS-API
 
 * specification of HTTP API to query KOS (in JSKOS)
 * based on vocabulary services use cases
+    * lookup of concept with known URI
+    * search concepts with unknown URI
+    * browsing in knowledge organization systems
+    * query mappings
+    * ...
 * work in progress ([RDA Vocabulary Services Interest Group](https://rd-alliance.org/groups/interest-groups)?)
 
 ## JSKOS-API current state
 
 * [Entity Lookup Microservice API (ELMA)](http://gbv.github.io/elma/)\
-  \ldots most relevant subset of JSKOS-API
+   as most relevant subset of JSKOS-API
+
+    entity lookup
+      : `?uri=http://sws.geonames.org/614540/`
+
+    entity search
+      : `?search=Euro`
+
 * public demo of terminology wrappers: 
-  <https://jskos-php-examples.herokuapp.com/>
-  (BARTOC, Wikidata, GND, ORCID, GeoNames, VIAF...)
-
-## JSKOS-API example
-
-...*fehlt noch*...
+  <https://jskos-php-examples.herokuapp.com/>\
+  (BARTOC, Wikidata, GND, ORCID, GeoNames, VIAF \ldots)
 
 # Applications
-
-## Applications
-
-* uniform access to terminologies
-    * browsing in knowledge organization systems
-    * semantic tagging 
-    * entity linking
-    * ...
-* terminology services
-* statistical analysis of terminologies
-* management of mappings
-* ...
-
-*foster the visibility, availability and usefulness of KOS in general*
 
 ## Terminology Service 
 
@@ -106,7 +116,37 @@ BARTOC JSKOS export: <https://github.com/gbv/bartoc-dumps/>
 
 ![](mapping-db-screenshot.png)
 
----
+## JSKOS mapping example
+
+~~~json
+{
+  "creator": { "notation": [ "VZG" ] },
+  "fromScheme": {
+     "uri": "http://bartoc.org/en/node/241",
+     "notation": [ "DDC" ]
+  },
+  "from": { "members" : [
+    { "uri:": "http://dewey.info/class/612.112" }
+  ] },
+  "toScheme" : {
+     "uri": "http://bartoc.org/en/node/533",
+     "notation": [ "RVK" ]
+  },
+  "to": { "members" : [
+    { "uri": "http://uri.gbv.de/terminology/rvk/WW8844" }
+  ] }
+}
+~~~
+
+## Other possible applications
+
+* semantic tagging
+* statistical analysis of terminologies
+* enrichment of concepts from multiple KOS
+* \ldots
+
+*foster the visibility, availability and usefulness of KOS in general*
+
 
 ## Thank you for attention
 
