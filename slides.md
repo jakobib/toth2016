@@ -34,10 +34,13 @@ main goal: **easy use of KOS data in web applications**
 ## JSKOS concept example from GeoNames (abbreviated)
 
 ~~~json
-{
+{ 
   "uri": "http://sws.geonames.org/614540/",
+  "inScheme": [ 
+    { "uri": "http://bartoc.org/en/node/15" }
+  ],
   "prefLabel": {
-    "en": "Georgia", 
+    "en": "Georgia",
     "fr": "Géorgie", 
     "de": "Georgien", 
     "-": "..."
@@ -45,15 +48,13 @@ main goal: **easy use of KOS data in web applications**
   "broader": [ 
     { "uri": "http://sws.geonames.org/6255147/" } 
   ],
-  "inScheme": [ 
-    { "uri": "http://bartoc.org/en/node/15" }
-  ],
-  ...
+  "narrower": [ ], ...
 ~~~
 
 ## BARTOC in JSKOS
 
-* KOS can also be expressed in JSKOS
+KOS can also be expressed in JSKOS
+
 * Mapping of BARTOC fields to JSKOS
 * BARTOC JSKOS export available:\
   <https://github.com/gbv/bartoc-dumps/>
@@ -100,7 +101,7 @@ main goal: **easy use of KOS data in web applications**
       : `?uri=http://sws.geonames.org/614540/`
 
     entity search
-      : `?search=Euro`
+      : `?search=Georgia` (labels, scopeNotes...)
 
 * public demo of terminology wrappers: 
   <https://jskos-php-examples.herokuapp.com/>\
@@ -119,8 +120,9 @@ main goal: **easy use of KOS data in web applications**
 ## JSKOS mapping example
 
 ~~~json
-{
+{ 
   "creator": { "notation": [ "VZG" ] },
+  "mappingMethod": "???",
   "fromScheme": {
      "uri": "http://bartoc.org/en/node/241",
      "notation": [ "DDC" ]
@@ -140,8 +142,10 @@ main goal: **easy use of KOS data in web applications**
 
 ## Other possible applications
 
-* semantic tagging
+* semantic tagging of documents with identified concepts
+  (e.g. <http://sws.geonames.org/614540/> instead of "Georgia")
 * statistical analysis of terminologies
+  (e.g. compare size in number of concepts, hierachy, density of links...)
 * enrichment of concepts from multiple KOS
 * \ldots
 
